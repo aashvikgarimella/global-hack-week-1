@@ -1,29 +1,29 @@
 import json
 import os
 
-# Define a path for the JSON file
+
 data_file = 'budget_data.json'
 
-# Initialize or load existing data
+
 if os.path.exists(data_file):
     with open(data_file, 'r') as file:
         budget_data = json.load(file)
 else:
     budget_data = {'budget': 0, 'expenses': []}
 
-# Function to update the data file
+
 def update_data():
     with open(data_file, 'w') as file:
         json.dump(budget_data, file, indent=4)
 
-# Function to set the budget
+
 def set_budget():
     budget = float(input("Enter your monthly budget: "))
     budget_data['budget'] = budget
     update_data()
     print("Monthly budget set to ${:.2f}".format(budget))
 
-# Function to record an expense
+
 def add_expense():
     amount = float(input("Enter the expense amount: $"))
     category = input("Enter the expense category: ")
@@ -31,7 +31,7 @@ def add_expense():
     update_data()
     print("Expense recorded.")
 
-# Function to display the budget report
+
 def display_report():
     total_expenses = sum(expense['amount'] for expense in budget_data['expenses'])
     print("\nBudget Report:")
@@ -43,7 +43,7 @@ def display_report():
         total = sum(expense['amount'] for expense in budget_data['expenses'] if expense['category'] == category)
         print(f"{category}: ${total:.2f}")
 
-# Main menu
+
 while True:
     print("\nPersonal Budget Planner")
     print("1. Set Monthly Budget")
